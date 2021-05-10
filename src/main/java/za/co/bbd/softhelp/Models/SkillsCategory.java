@@ -79,6 +79,14 @@ public class SkillsCategory {
         this.name = name;
     }
 
+    public Set<ProjectTable> getProject() {
+        return project;
+    }
+
+    public void setProject(Set<ProjectTable> project) {
+        this.project = project;
+    }
+
     @Override
     public String toString() {
         return "SkillsCategory{" +

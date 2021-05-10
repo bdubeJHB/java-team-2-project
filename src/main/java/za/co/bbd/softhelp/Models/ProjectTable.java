@@ -76,6 +76,38 @@ public class ProjectTable {
         this.price = price;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getWorker() {
+        return worker;
+    }
+
+    public void setWorker(User worker) {
+        this.worker = worker;
+    }
+
+    public SkillsCategory getSkill() {
+        return skill;
+    }
+
+    public void setSkill(SkillsCategory skill) {
+        this.skill = skill;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "ProjectTable{" +

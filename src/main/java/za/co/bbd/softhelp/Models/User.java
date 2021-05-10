@@ -104,6 +104,26 @@ public class User {
         this.email = email;
     }
 
+    public void setSkillsCategorys(Set<SkillsCategory> skillsCategorys) {
+        this.skillsCategorys = skillsCategorys;
+    }
+
+    public Set<ProjectTable> getProjectTables() {
+        return projectTables;
+    }
+
+    public void setProjectTables(Set<ProjectTable> projectTables) {
+        this.projectTables = projectTables;
+    }
+
+    public Set<ProjectTable> getProject() {
+        return project;
+    }
+
+    public void setProject(Set<ProjectTable> project) {
+        this.project = project;
+    }
+
     @Override
     public String toString() {
         return "User{" +
