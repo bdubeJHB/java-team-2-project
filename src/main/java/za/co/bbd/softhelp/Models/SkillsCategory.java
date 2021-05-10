@@ -3,6 +3,7 @@ package za.co.bbd.softhelp.Models;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -28,14 +29,6 @@ public class SkillsCategory {
     private String name;
 
 
-    public Set<Client> getUser() {
-        return user;
-    }
-
-    public void setUser(Set<Client> user) {
-        this.user = user;
-    }
-
     //--------------
     @ManyToMany
     @JoinTable(
@@ -43,10 +36,10 @@ public class SkillsCategory {
             joinColumns = @JoinColumn(name="skillID")
             ,inverseJoinColumns = @JoinColumn(name="userID")
     )
-    private Set<Client> user = new HashSet<>();
+    private List<Client> user ;
 
     @OneToMany(mappedBy = "skill")
-    Set<ProjectTable> project = new HashSet<>();
+    List<ProjectTable> project ;
 
     //--------------
 
@@ -79,11 +72,19 @@ public class SkillsCategory {
         this.name = name;
     }
 
-    public Set<ProjectTable> getProject() {
+    public List<Client> getUser() {
+        return user;
+    }
+
+    public void setUser(List<Client> user) {
+        this.user = user;
+    }
+
+    public List<ProjectTable> getProject() {
         return project;
     }
 
-    public void setProject(Set<ProjectTable> project) {
+    public void setProject(List<ProjectTable> project) {
         this.project = project;
     }
 

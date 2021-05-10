@@ -28,6 +28,10 @@ public class ProjectTable {
         this.price = price;
     }
 
+    public ProjectTable(String description, float price) {
+        this.description = description;
+        this.price = price;
+    }
 
     public ProjectTable() {
     }

@@ -3,6 +3,7 @@ package za.co.bbd.softhelp.Models;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity()
@@ -38,21 +39,19 @@ public class Client {
             ,unique = true)
     private String email;
 
-    public Set<SkillsCategory> getSkillsCategorys() {
-        return skillsCategorys;
-    }
 
     //--------------
     @ManyToMany(mappedBy = "user")
-    private Set<SkillsCategory> skillsCategorys = new HashSet<>();
+//    private Set<SkillsCategory> skillsCategorys = new HashSet<>();
+    private List<SkillsCategory> skillsCategorys;
 //--------------
 
 
     @OneToMany(mappedBy = "user")
-    Set<ProjectTable> projectTables = new HashSet<>();
+    List<ProjectTable> projectTables ;
 
     @OneToMany(mappedBy = "worker")
-    Set<ProjectTable> project = new HashSet<>();
+    List<ProjectTable> project ;
 
     public Client(Long userId, String firstName, String lastName, String email) {
         this.userId = userId;
@@ -104,23 +103,27 @@ public class Client {
         this.email = email;
     }
 
-    public void setSkillsCategorys(Set<SkillsCategory> skillsCategorys) {
+    public List<SkillsCategory> getSkillsCategorys() {
+        return skillsCategorys;
+    }
+
+    public void setSkillsCategorys(List<SkillsCategory> skillsCategorys) {
         this.skillsCategorys = skillsCategorys;
     }
 
-    public Set<ProjectTable> getProjectTables() {
+    public List<ProjectTable> getProjectTables() {
         return projectTables;
     }
 
-    public void setProjectTables(Set<ProjectTable> projectTables) {
+    public void setProjectTables(List<ProjectTable> projectTables) {
         this.projectTables = projectTables;
     }
 
-    public Set<ProjectTable> getProject() {
+    public List<ProjectTable> getProject() {
         return project;
     }
 
-    public void setProject(Set<ProjectTable> project) {
+    public void setProject(List<ProjectTable> project) {
         this.project = project;
     }
 
