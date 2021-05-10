@@ -22,19 +22,6 @@ public class User {
             generator = "user_sequence"
     )
 
-//    @ManyToMany()
-//    @JoinTable(
-//            name = "JoinSkill"
-//            ,joinColumns = @JoinColumn(
-//                    name = "userID",
-//                    referencedColumnName = "ID"
-//            ),
-//            inverseJoinColumns = @JoinColumn(
-//                    name = "skillID",
-//                    referencedColumnName = "ID"
-//            )
-//    )
-//    Set<SkillsCategory> skillsCategories = new HashSet<>();
     @Column(name = "userID")
     private Long userId;
 
@@ -50,6 +37,11 @@ public class User {
             ,nullable = false
             ,unique = true)
     private String email;
+
+    //--------------
+    @ManyToMany(mappedBy = "user")
+    private Set<SkillsCategory> skillsCategorys = new HashSet<>();
+//--------------
 
     public User(Long userId, String firstName, String lastName, String email) {
         this.userId = userId;
