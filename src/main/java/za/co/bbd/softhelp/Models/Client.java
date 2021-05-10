@@ -6,8 +6,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity()
-@Table(name = "client")
-public class User {
+@Table(name = "Client")
+public class Client {
 
 
     @Id
@@ -54,7 +54,7 @@ public class User {
     @OneToMany(mappedBy = "worker")
     Set<ProjectTable> project = new HashSet<>();
 
-    public User(Long userId, String firstName, String lastName, String email) {
+    public Client(Long userId, String firstName, String lastName, String email) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -62,11 +62,11 @@ public class User {
     }
 
 
-    public User(){
+    public Client(){
 
     }
 
-    public User(String firstName, String lastName, String email) {
+    public Client(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

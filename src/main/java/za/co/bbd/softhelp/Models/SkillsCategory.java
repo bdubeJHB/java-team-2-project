@@ -28,11 +28,11 @@ public class SkillsCategory {
     private String name;
 
 
-    public Set<User> getUser() {
+    public Set<Client> getUser() {
         return user;
     }
 
-    public void setUser(Set<User> user) {
+    public void setUser(Set<Client> user) {
         this.user = user;
     }
 
@@ -43,7 +43,7 @@ public class SkillsCategory {
             joinColumns = @JoinColumn(name="skillID")
             ,inverseJoinColumns = @JoinColumn(name="userID")
     )
-    private Set<User> user = new HashSet<>();
+    private Set<Client> user = new HashSet<>();
 
     @OneToMany(mappedBy = "skill")
     Set<ProjectTable> project = new HashSet<>();

@@ -1,8 +1,6 @@
 package za.co.bbd.softhelp.Models;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name="ProjectTable")
@@ -36,12 +34,12 @@ public class ProjectTable {
 
     @ManyToOne
     @JoinColumn(name = "user_ID")
-    User user = new User();
+    Client user = new Client();
 
 
     @ManyToOne
     @JoinColumn(name = "Worker_ID")
-    User worker = new User();
+    Client worker = new Client();
 
     @ManyToOne
     @JoinColumn(name = "skill_ID")
@@ -76,19 +74,19 @@ public class ProjectTable {
         this.price = price;
     }
 
-    public User getUser() {
+    public Client getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Client user) {
         this.user = user;
     }
 
-    public User getWorker() {
+    public Client getWorker() {
         return worker;
     }
 
-    public void setWorker(User worker) {
+    public void setWorker(Client worker) {
         this.worker = worker;
     }
 
