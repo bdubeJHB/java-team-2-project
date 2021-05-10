@@ -38,10 +38,21 @@ public class User {
             ,unique = true)
     private String email;
 
+    public Set<SkillsCategory> getSkillsCategorys() {
+        return skillsCategorys;
+    }
+
     //--------------
     @ManyToMany(mappedBy = "user")
     private Set<SkillsCategory> skillsCategorys = new HashSet<>();
 //--------------
+
+
+    @OneToMany(mappedBy = "user")
+    Set<ProjectTable> projectTables = new HashSet<>();
+
+    @OneToMany(mappedBy = "worker")
+    Set<ProjectTable> project = new HashSet<>();
 
     public User(Long userId, String firstName, String lastName, String email) {
         this.userId = userId;

@@ -28,6 +28,14 @@ public class SkillsCategory {
     private String name;
 
 
+    public Set<User> getUser() {
+        return user;
+    }
+
+    public void setUser(Set<User> user) {
+        this.user = user;
+    }
+
     //--------------
     @ManyToMany
     @JoinTable(
@@ -36,6 +44,9 @@ public class SkillsCategory {
             ,inverseJoinColumns = @JoinColumn(name="userID")
     )
     private Set<User> user = new HashSet<>();
+
+    @OneToMany(mappedBy = "skill")
+    Set<ProjectTable> project = new HashSet<>();
 
     //--------------
 
