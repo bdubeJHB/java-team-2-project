@@ -21,14 +21,23 @@ public class SkillsCategory {
             generator = "skillscategory_sequence"
     )
 
-//    @ManyToMany(mappedBy = "skillsCategories")
-//    Set<User> users = new HashSet<>();
-
     @Column(name = "skillID")
     private  Long id;
 
     @Column(name = "name")
     private String name;
+
+
+    //--------------
+    @ManyToMany
+    @JoinTable(
+            name ="skill_set",
+            joinColumns = @JoinColumn(name="skillID")
+            ,inverseJoinColumns = @JoinColumn(name="userID")
+    )
+    private Set<User> user = new HashSet<>();
+
+    //--------------
 
     public SkillsCategory(Long id, String name) {
         this.id = id;
