@@ -2,13 +2,19 @@ package za.co.bbd.softhelp.Models;
 
 
 import javax.persistence.*;
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
+=======
+import java.util.*;
+>>>>>>> Piet
 
 @Entity
 @Table()
 public class Status {
 
+    @OneToMany(mappedBy = "status")
+    private List<ProjectTable> projects = new ArrayList<>();
 
 
 
@@ -43,7 +49,15 @@ public class Status {
     )
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> Piet
     private Long statusId;
+
+    @Column(name = "status"
+            ,nullable = false
+            ,updatable = false)
     private String status;
 
 

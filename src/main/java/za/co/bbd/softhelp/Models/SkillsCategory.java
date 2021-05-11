@@ -25,7 +25,10 @@ public class SkillsCategory {
     @Column(name = "skillID")
     private  Long id;
 
-    @Column(name = "name")
+    @Column(
+            name = "name",
+            updatable = false
+    )
     private String name;
 
 
