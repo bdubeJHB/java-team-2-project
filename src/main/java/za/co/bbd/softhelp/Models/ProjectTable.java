@@ -36,22 +36,26 @@ public class ProjectTable {
     public ProjectTable() {
     }
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "user_ID")
     Client user = new Client();
 
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "Worker_ID")
     Client worker = new Client();
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "skill_ID")
     SkillsCategory skill = new SkillsCategory();
 
-    @OneToOne
+    @ManyToOne(targetEntity = Status.class)
     @JoinColumn(name = "status_ID")
-    Status status;
+    Status status = new Status();
+
+//    @OneToOne
+//    @JoinColumn(name = "status_ID")
+//    Status status = new Status();
 
 
     public long getProjectId() {

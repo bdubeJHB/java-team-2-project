@@ -30,7 +30,7 @@ public class SkillsCategory {
 
 
     //--------------
-    @ManyToMany
+    @ManyToMany()
     @JoinTable(
             name ="skill_set",
             joinColumns = @JoinColumn(name="skillID")

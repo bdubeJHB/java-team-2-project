@@ -9,6 +9,4 @@ public class SofthelpApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SofthelpApplication.class, args);
 	}
-
-
 }

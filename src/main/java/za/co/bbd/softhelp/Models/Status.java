@@ -2,16 +2,26 @@ package za.co.bbd.softhelp.Models;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table()
 public class Status {
 
 
+
+
     public Status(Long statusId, String status) {
         this.statusId = statusId;
         this.status = status;
     }
+
+    //added this
+    //-----------------------------------------------------------------------
+    @OneToMany(mappedBy = "status")
+    List<ProjectTable> projectTableList;
+    //-----------------------------------------------------------------------
 
     public Status() {
     }
@@ -32,8 +42,10 @@ public class Status {
             generator = "status_sequence"
     )
 
+
     private Long statusId;
     private String status;
+
 
     public Long getStatusId() {
         return statusId;
@@ -50,6 +62,17 @@ public class Status {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    //added this
+    //-----------------------------------------------------------------------------
+    public List<ProjectTable> getProjectTableList() {
+        return projectTableList;
+    }
+
+    public void setProjectTableList(List<ProjectTable> projectTableList) {
+        this.projectTableList = projectTableList;
+    }
+    //-----------------------------------------------------------------------------
 
     @Override
     public String toString() {
