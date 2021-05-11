@@ -42,7 +42,6 @@ public class Client {
 
     //--------------
     @ManyToMany(mappedBy = "user")
-//    private Set<SkillsCategory> skillsCategorys = new HashSet<>();
     private List<SkillsCategory> skillsCategorys;
 //--------------
 
@@ -62,7 +61,6 @@ public class Client {
 
 
     public Client(){
-
     }
 
     public Client(String firstName, String lastName, String email) {
