@@ -18,7 +18,11 @@ public class ProjectTable {
     )
 
     private long projectId;
+    @Column(name = "description"
+            ,nullable = false)
     private String description;
+    @Column(name = "price"
+            ,nullable = false)
     private  float price;
 
 

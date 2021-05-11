@@ -38,6 +38,10 @@ public class Status {
 
 
     private Long statusId;
+
+    @Column(name = "status"
+            ,nullable = false
+            ,updatable = false)
     private String status;
 
     public Long getStatusId() {
