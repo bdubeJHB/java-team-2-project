@@ -37,6 +37,10 @@ public class ProjectTable {
     }
 
     @ManyToOne
+    @JoinColumn(name = "status_ID")
+    private Status status ;
+
+    @ManyToOne
     @JoinColumn(name = "user_ID")
     Client user = new Client();
 
@@ -48,10 +52,6 @@ public class ProjectTable {
     @ManyToOne
     @JoinColumn(name = "skill_ID")
     SkillsCategory skill = new SkillsCategory();
-
-    @OneToOne
-    @JoinColumn(name = "status_ID")
-    Status status;
 
 
     public long getProjectId() {
