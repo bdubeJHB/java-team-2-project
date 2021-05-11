@@ -2,12 +2,8 @@ package za.co.bbd.softhelp.Models;
 
 
 import javax.persistence.*;
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
-=======
-import java.util.*;
->>>>>>> Piet
 
 @Entity
 @Table()
@@ -49,10 +45,6 @@ public class Status {
     )
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> Piet
     private Long statusId;
 
     @Column(name = "status"
