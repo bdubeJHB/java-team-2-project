@@ -3,11 +3,12 @@ package za.co.bbd.softhelp.Models;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity()
-@Table(name = "client")
-public class User {
+@Table(name = "Client")
+public class Client {
 
 
     @Id
@@ -38,12 +39,21 @@ public class User {
             ,unique = true)
     private String email;
 
+
     //--------------
     @ManyToMany(mappedBy = "user")
-    private Set<SkillsCategory> skillsCategorys = new HashSet<>();
+//    private Set<SkillsCategory> skillsCategorys = new HashSet<>();
+    private List<SkillsCategory> skillsCategorys;
 //--------------
 
-    public User(Long userId, String firstName, String lastName, String email) {
+
+    @OneToMany(mappedBy = "user")
+    List<ProjectTable> projectTables ;
+
+    @OneToMany(mappedBy = "worker")
+    List<ProjectTable> project ;
+
+    public Client(Long userId, String firstName, String lastName, String email) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -51,11 +61,11 @@ public class User {
     }
 
 
-    public User(){
+    public Client(){
 
     }
 
-    public User(String firstName, String lastName, String email) {
+    public Client(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -91,6 +101,30 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<SkillsCategory> getSkillsCategorys() {
+        return skillsCategorys;
+    }
+
+    public void setSkillsCategorys(List<SkillsCategory> skillsCategorys) {
+        this.skillsCategorys = skillsCategorys;
+    }
+
+    public List<ProjectTable> getProjectTables() {
+        return projectTables;
+    }
+
+    public void setProjectTables(List<ProjectTable> projectTables) {
+        this.projectTables = projectTables;
+    }
+
+    public List<ProjectTable> getProject() {
+        return project;
+    }
+
+    public void setProject(List<ProjectTable> project) {
+        this.project = project;
     }
 
     @Override
