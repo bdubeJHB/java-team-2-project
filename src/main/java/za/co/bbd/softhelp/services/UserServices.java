@@ -23,13 +23,17 @@ public class UserServices {
     }
 
     public Optional<User> GetUserById(Long id){
-        return userRepository.findById(id);
+        Optional<User> user = userRepository.findById(id);
+        if (user.isEmpty()){
+            throw new IllegalStateException("User ID "+id+" does not exist");
+        }
+        return user;
     }
 
     public void addNewUser(User user){
         Optional<User> UsersByEmail = userRepository.findUserByEmail(user.getEmail());
-        if (!UsersByEmail.isPresent()){
-            throw new IllegalStateException("Email Taken");
+        if (UsersByEmail.isPresent()){
+            throw new IllegalStateException(user.getEmail()+" is already registered");
         }
         userRepository.save(user);
     }
