@@ -46,11 +46,6 @@ public class SkillsCategory {
 
     //--------------
 
-    public SkillsCategory(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
     public SkillsCategory(String name) {
         this.name = name;
     }
