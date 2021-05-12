@@ -9,7 +9,6 @@ import za.co.bbd.softhelp.Models.Client;
 
 @Controller
 public class EndpointController {
-
     @GetMapping("/wtf")
     String landingPage(Model model){
         return "index";
