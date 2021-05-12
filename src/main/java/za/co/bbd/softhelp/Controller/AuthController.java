@@ -1,5 +1,6 @@
 package za.co.bbd.softhelp.Controller;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,5 +16,7 @@ public class AuthController {
         GoogleAuthResponse response = new GoogleAuthResponse(principal);
 
         return response.getEmail();
+//        return principal.toString();
     }
+//    }
 }
