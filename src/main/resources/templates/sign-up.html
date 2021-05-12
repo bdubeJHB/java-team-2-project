@@ -12,7 +12,7 @@
         <input type="text" placeholder="username" name="firstName" />
         <input type="text" placeholder="Bio (120 characters)" />
         <select>
-            <option>Skills list coming soon</option>
+            <option th:each="skill : ${skills}" th:text="${skill[1]}" th:value="${skill[0]}"></option>
         </select>
         <input type="submit" value="create acc"/>
     </form>

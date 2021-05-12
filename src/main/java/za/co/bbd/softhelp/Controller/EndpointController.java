@@ -19,6 +19,7 @@ public class EndpointController{
 
     ClientServices clientService;
     ProjectServices projectService;
+    private String userEmail;
 
     @Autowired
     EndpointController(ClientServices clientService, ProjectServices projectService){
@@ -35,27 +36,46 @@ public class EndpointController{
      * [Only called internally] Attempt to sign in user.
      * If the given email exists in DB, redirect the user to the home page.
      * Otherwise, redirect the user to the sign up page.
-     * @param email: The email address of the user attempting to log in
+//     * @param email: The email address of the user attempting to log in
      * @param model: The model map to be used for redirecting
      * @return ModelAndView: A new model with the email address as an attribute, and a redirected view
      */
     @PostMapping("/sign-in")
-    ModelAndView checkCredentials(String email, ModelMap model){
+    ModelAndView checkCredentials(ModelMap model){
         try{
-            List<Client> user = clientService.getClientByEmail(email);
+            List<Client> user = clientService.getClientByEmail(userEmail);
             model.addAttribute("user", user.get(0));
             return new ModelAndView("redirect:/home", model);
         }catch(IllegalStateException e){
             String skip = "skiiip";
         }
 
-        model.addAttribute("email", email);
+        model.addAttribute("email", userEmail);
         return new ModelAndView("redirect:/sign-up", model);
     }
 
     @GetMapping("/sign-up")
     String createUser(String email, Model model){
+        List<List<String>> projects = new ArrayList<>(0);
+
+        ArrayList<String> keyValue1 = new ArrayList<>();
+        keyValue1.add("1");
+        keyValue1.add("F#");
+
+        ArrayList<String> keyValue2 = new ArrayList<>();
+        keyValue2.add("2");
+        keyValue2.add("C#");
+
+        ArrayList<String> keyValue3 = new ArrayList<>();
+        keyValue3.add("3");
+        keyValue3.add("K#");
+
+        projects.add(keyValue1);
+        projects.add(keyValue2);
+        projects.add(keyValue3);
+
         model.addAttribute("email", email);
+        model.addAttribute("skills", projects);
         return "sign-up";
     }
 
@@ -70,13 +90,35 @@ public class EndpointController{
     String homePage(@ModelAttribute Client client, Model model){
         List<List<String>> projects = new ArrayList<>(0);
 
-        for (SkillsCategory skill : client.getSkillsCategorys()){
-            projects = userProjects(client, 5);
-        }
+        ArrayList<String> keyValue1 = new ArrayList<>();
+        keyValue1.add("1");
+        keyValue1.add("F#");
+
+        ArrayList<String> keyValue2 = new ArrayList<>();
+        keyValue2.add("2");
+        keyValue2.add("C#");
+
+        ArrayList<String> keyValue3 = new ArrayList<>();
+        keyValue3.add("3");
+        keyValue3.add("K#");
+
+        projects.add(keyValue1);
+        projects.add(keyValue2);
+        projects.add(keyValue3);
+
+//        for (SkillsCategory skill : client.getSkillsCategorys()){
+//            projects = userProjects(client, 5);
+//        }
 
         model.addAttribute("user", client);
         model.addAttribute("projects", projects);
         return "home";
+    }
+
+    @PutMapping("/all-projects")
+    String allProjectsForUser(@ModelAttribute Client client, Model model){
+        model.addAttribute("projects", userProjects(client, -1));
+        return "all-projects";
     }
 
     /**
@@ -90,7 +132,7 @@ public class EndpointController{
      * [4] - Client for project
      * [5] - Assigned worker for project
      * @param client: The user to search projects for
-     * @param limit: The number of maximum number of projects to add
+     * @param limit: The number of maximum number of projects to add. -1 for all projects
      * @return List<List<String>>: The list of projects found
      */
     List<List<String>> userProjects(Client client, int limit){
@@ -115,7 +157,7 @@ public class EndpointController{
         for (List<String> project : projectsForSkill) {
             boolean available = project.get(3).equalsIgnoreCase("available"); // project status = available
             boolean noWorker = project.get(5) == null; // project worker is not defined
-            boolean spaceAvailable = projectsForUser.size() < limit; // projects to be shown < 5
+            boolean spaceAvailable = limit < 0 || projectsForUser.size() < limit; // projects to be shown < 5
 
             if (available && noWorker && spaceAvailable) {
                 projectsForUser.add(project);
