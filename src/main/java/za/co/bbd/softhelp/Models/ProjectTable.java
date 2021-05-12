@@ -18,7 +18,11 @@ public class ProjectTable {
     )
 
     private long projectId;
+    @Column(name = "description"
+            ,nullable = false)
     private String description;
+    @Column(name = "price"
+            ,nullable = false)
     private  float price;
 
 
@@ -37,6 +41,10 @@ public class ProjectTable {
     }
 
     @ManyToOne
+    @JoinColumn(name = "status_ID")
+    private Status status ;
+
+    @ManyToOne
     @JoinColumn(name = "user_ID")
     Client user = new Client();
 
@@ -48,10 +56,6 @@ public class ProjectTable {
     @ManyToOne
     @JoinColumn(name = "skill_ID")
     SkillsCategory skill = new SkillsCategory();
-
-    @OneToOne
-    @JoinColumn(name = "status_ID")
-    Status status;
 
 
     public long getProjectId() {

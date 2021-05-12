@@ -2,11 +2,14 @@ package za.co.bbd.softhelp.Models;
 
 
 import javax.persistence.*;
+import java.util.*;
 
 @Entity
 @Table()
 public class Status {
 
+    @OneToMany(mappedBy = "status")
+    private List<ProjectTable> projects = new ArrayList<>();
 
     public Status(Long statusId, String status) {
         this.statusId = statusId;
@@ -32,7 +35,13 @@ public class Status {
             generator = "status_sequence"
     )
 
+
+
     private Long statusId;
+
+    @Column(name = "status"
+            ,nullable = false
+            ,updatable = false)
     private String status;
 
     public Long getStatusId() {

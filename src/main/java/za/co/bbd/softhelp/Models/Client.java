@@ -2,9 +2,7 @@ package za.co.bbd.softhelp.Models;
 
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity()
 @Table(name = "Client")
@@ -32,7 +30,7 @@ public class Client {
 
     @Column(name = "last_name"
             ,nullable = false)
-    private String lastName;
+    private String description;
 
     @Column(name = "email"
             ,nullable = false
@@ -42,7 +40,6 @@ public class Client {
 
     //--------------
     @ManyToMany(mappedBy = "user")
-//    private Set<SkillsCategory> skillsCategorys = new HashSet<>();
     private List<SkillsCategory> skillsCategorys;
 //--------------
 
@@ -56,18 +53,17 @@ public class Client {
     public Client(Long userId, String firstName, String lastName, String email) {
         this.userId = userId;
         this.firstName = firstName;
-        this.lastName = lastName;
+        this.description = lastName;
         this.email = email;
     }
 
 
     public Client(){
-
     }
 
     public Client(String firstName, String lastName, String email) {
         this.firstName = firstName;
-        this.lastName = lastName;
+        this.description = lastName;
         this.email = email;
     }
 
@@ -87,12 +83,12 @@ public class Client {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getDescription() {
+        return description;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getEmail() {
@@ -132,7 +128,7 @@ public class Client {
         return "User{" +
                 "userId=" + userId +
                 ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", lastName='" + description + '\'' +
                 ", email='" + email + '\'' +
                 '}';
     }

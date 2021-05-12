@@ -30,9 +30,11 @@ public class CONFIG {
             Status status2 = new Status("In progress");
             Status status3 = new Status("Complete");
 
-            SkillsCategory skillsCategory1 = new SkillsCategory("java");
+            SkillsCategory skillsCategory0 = new SkillsCategory("Java");
+            SkillsCategory skillsCategory1 = new SkillsCategory("JavaScript");
             SkillsCategory skillsCategory2 = new SkillsCategory("Python");
             SkillsCategory skillsCategory3 = new SkillsCategory("C#");
+            SkillsCategory skillsCategory4 = new SkillsCategory("PHP");
             // -----------End of Config  ----------------------------
 
             // ----------- Test database -----------------------------
@@ -50,11 +52,17 @@ public class CONFIG {
             projectTable.setSkill(skillsCategory2);
             projectTable.setWorker(user2);
 
+            ProjectTable projectTable2 = new ProjectTable("mobile app", 133.0F);
+            projectTable2.setUser(user2);
+            projectTable2.setStatus(status2);
+            projectTable2.setSkill(skillsCategory3);
+            projectTable2.setWorker(user1);
 
             userRepository.saveAll(List.of(user1,user2,user));
             skillsRepository.saveAll(List.of(skillsCategory1,skillsCategory2,skillsCategory3));
             statusRepository.saveAll(List.of(status1,status2,status3));
-            projectRepository.save(projectTable);
+            projectRepository.saveAll(List.of(projectTable,projectTable2));
+
 
             // --------End of test -----------------------------------
 
