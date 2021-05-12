@@ -28,7 +28,7 @@ public class Client {
             ,nullable = false)
     private String firstName;
 
-    @Column(name = "last_name"
+    @Column(name = "description"
             ,nullable = false)
     private String description;
 
@@ -49,13 +49,6 @@ public class Client {
 
     @OneToMany(mappedBy = "worker")
     List<ProjectTable> project ;
-
-    public Client(Long userId, String firstName, String lastName, String email) {
-        this.userId = userId;
-        this.firstName = firstName;
-        this.description = lastName;
-        this.email = email;
-    }
 
 
     public Client(){

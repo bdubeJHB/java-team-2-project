@@ -11,11 +11,6 @@ public class Status {
     @OneToMany(mappedBy = "status")
     private List<ProjectTable> projects = new ArrayList<>();
 
-    public Status(Long statusId, String status) {
-        this.statusId = statusId;
-        this.status = status;
-    }
-
     public Status() {
     }
 
@@ -34,7 +29,6 @@ public class Status {
             strategy = GenerationType.SEQUENCE,
             generator = "status_sequence"
     )
-
 
 
     private Long statusId;
