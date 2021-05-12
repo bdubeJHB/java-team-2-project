@@ -32,7 +32,11 @@ public class ClientServices {
         return clientList;
     }
 
-    public List<Client> getClientByEmail(String email){
+    public void addNewUser(Client client){
+        userRepository.save(client);
+    }
+
+    public List<Client> getClientByEmail(String email) throws IllegalStateException{
         List<Client> client =  userRepository.findByemail(email);
         if(client.isEmpty()){
             throw new IllegalStateException("Client email: " + email + "does not exist");
