@@ -31,7 +31,7 @@ public class ClientServices {
         Client client = userRepository.findById(id).get();
 
         clientInfo.add(client.getFirstName());
-        clientInfo.add(client.getLastName());
+        clientInfo.add(client.getDescription());
         clientInfo.add(client.getEmail());
 
         return clientInfo;
@@ -47,10 +47,7 @@ public class ClientServices {
         return client.getFirstName();
     }
 
-    public String getClientLastName(Long id) {
-        Client client = getClientById(id).get();
-        return client.getLastName();
-    }
+
 
     public void deleteClient(Long id) {
         Optional<Client> client = getClientById(id);

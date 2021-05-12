@@ -10,6 +10,4 @@ import java.util.List;
 @Repository
 public interface ProjectRepository extends JpaRepository<ProjectTable,Long> {
 
-    @Query("FROM ProjectTable where status_ID=?1")
-    List<ProjectTable> findBystatus_IDEqual(long status_ID);
 }
