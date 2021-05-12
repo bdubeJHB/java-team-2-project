@@ -51,6 +51,15 @@ public class ClientServices {
         return clientInfo;
     }
 
+    public String addNewClient(Client client){
+        List<Client> isRegistered = userRepository.findByemail(client.getEmail());
+        if(!isRegistered.isEmpty()){
+            throw new IllegalStateException("Email is already registered");
+        }
+        userRepository.save(client);
+        return client.getEmail()+" has been Registered.";
+    }
+
     public String getClientEmail(String email) {
         List<String> clientInfo = new ArrayList<>();
         Client client = userRepository.findByemail(email).get(0);
