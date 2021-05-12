@@ -18,15 +18,13 @@ public class ProjectTable {
     )
 
     private long projectId;
+    @Column(name = "description"
+            ,nullable = false)
     private String description;
+    @Column(name = "price"
+            ,nullable = false)
     private  float price;
 
-
-    public ProjectTable(long projectId, String description, float price) {
-        this.projectId = projectId;
-        this.description = description;
-        this.price = price;
-    }
 
     public ProjectTable(String description, float price) {
         this.description = description;
@@ -35,6 +33,10 @@ public class ProjectTable {
 
     public ProjectTable() {
     }
+
+    @ManyToOne
+    @JoinColumn(name = "status_ID")
+    private Status status ;
 
     @ManyToOne
     @JoinColumn(name = "user_ID")
@@ -48,10 +50,6 @@ public class ProjectTable {
     @ManyToOne
     @JoinColumn(name = "skill_ID")
     SkillsCategory skill = new SkillsCategory();
-
-    @OneToOne
-    @JoinColumn(name = "status_ID")
-    Status status;
 
 
     public long getProjectId() {

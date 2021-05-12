@@ -25,7 +25,10 @@ public class SkillsCategory {
     @Column(name = "skillID")
     private  Long id;
 
-    @Column(name = "name")
+    @Column(
+            name = "name",
+            updatable = false
+    )
     private String name;
 
 
@@ -42,11 +45,6 @@ public class SkillsCategory {
     List<ProjectTable> project ;
 
     //--------------
-
-    public SkillsCategory(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
 
     public SkillsCategory(String name) {
         this.name = name;
