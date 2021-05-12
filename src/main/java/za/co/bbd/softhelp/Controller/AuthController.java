@@ -11,7 +11,7 @@ import java.security.Principal;
 @RestController
 public class AuthController {
     @RequestMapping(value="/sign-in")
-    @ResponseBody
+//    @ResponseBody
     public String authorize(Principal principal) {
         GoogleAuthResponse response = new GoogleAuthResponse(principal);
 
