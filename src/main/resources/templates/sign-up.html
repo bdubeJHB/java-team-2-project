@@ -7,13 +7,14 @@
     <title>New Account</title>
 </head>
 <body>
-    <form action="/home" >
+    <form action="/home" th:action="@{/home}">
         <input type="text" placeholder="Email" th:value="${email}" name="email" />
         <input type="text" placeholder="username" name="firstName" />
         <input type="text" placeholder="Bio (120 characters)" />
         <select>
             <option>Skills list coming soon</option>
         </select>
+        <input type="submit" value="create acc"/>
     </form>
 </body>
 </html>

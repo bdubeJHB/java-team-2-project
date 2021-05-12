@@ -8,28 +8,21 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import za.co.bbd.softhelp.Models.Client;
 import za.co.bbd.softhelp.Models.SkillsCategory;
+import za.co.bbd.softhelp.services.ClientServices;
+import za.co.bbd.softhelp.services.ProjectServices;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class EndpointController{
 
     ClientServices clientService;
-    UserServices userService;
     ProjectServices projectService;
-    SkillServices skillService;
 
     @Autowired
-    EndpointController(
-            ClientServices clientService,
-            UserServices userService,
-            ProjectServices projectService,
-            SkillServices skillService){
+    EndpointController(ClientServices clientService, ProjectServices projectService){
         this.projectService = projectService;
-        this.skillService = skillService;
-        this.userService = userService;
         this.clientService = clientService;
     }
 
@@ -48,18 +41,19 @@ public class EndpointController{
      */
     @PostMapping("/sign-in")
     ModelAndView checkCredentials(String email, ModelMap model){
-        Optional user = clientService.findUserByEmail(email);
-
-        if (user.isPresent()){
-            model.addAttribute("user", (Client) user.get());
+        try{
+            List<Client> user = clientService.getClientByEmail(email);
+            model.addAttribute("user", user.get(0));
             return new ModelAndView("redirect:/home", model);
+        }catch(IllegalStateException e){
+            String skip = "skiiip";
         }
 
         model.addAttribute("email", email);
         return new ModelAndView("redirect:/sign-up", model);
     }
 
-    @PostMapping("/sign-up")
+    @GetMapping("/sign-up")
     String createUser(String email, Model model){
         model.addAttribute("email", email);
         return "sign-up";
