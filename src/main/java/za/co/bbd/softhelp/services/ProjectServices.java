@@ -1,29 +1,29 @@
-//package za.co.bbd.softhelp.services;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Service;
-//import za.co.bbd.softhelp.Models.ProjectTable;
-//import za.co.bbd.softhelp.Repository.ProjectRepository;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//import java.util.Optional;
-//
-//@Service
-//public class ProjectServices {
-//    final private ProjectRepository projectRepository;
-//
-//    @Autowired
-//    public ProjectServices(ProjectRepository projectRepository) {
-//        this.projectRepository = projectRepository;
-//    }
-//
+package za.co.bbd.softhelp.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import za.co.bbd.softhelp.Models.ProjectTable;
+import za.co.bbd.softhelp.Repository.ProjectRepository;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class ProjectServices {
+    final private ProjectRepository projectRepository;
+
+    @Autowired
+    public ProjectServices(ProjectRepository projectRepository) {
+        this.projectRepository = projectRepository;
+    }
+
 //    public List<ProjectTable> getProjectsBySkill(Long skillId){
-//        return projectRepository.findBySkillId(skillId);
+//        return projectRepository.findByskill_ID(skillId);
 //    }
-//
+
 //    public List<List<String>> getProjectsBySkillList(Long skillId){
-////        List<ProjectTable> projects = projectRepository.findBySkillId(skillId);
+//        List<ProjectTable> projects = projectRepository.findByskill_ID(skillId);
 //        if(projects.isEmpty()){
 //            throw new IllegalStateException("There are no projects available for that skill");
 //        }
@@ -42,4 +42,4 @@
 //
 //        return projectList;
 //    }
-//}
+}

@@ -63,7 +63,7 @@ public class CONFIG {
             statusRepository.saveAll(List.of(status1,status2,status3));
             projectRepository.saveAll(List.of(projectTable,projectTable2));
 
-
+//            System.out.println(projectRepository.count());
             // --------End of test -----------------------------------
 
         };
