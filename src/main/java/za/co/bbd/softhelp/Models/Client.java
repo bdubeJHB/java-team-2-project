@@ -24,12 +24,16 @@ public class Client {
     @Column(name = "userID")
     private Long userId;
 
-    @Column(name = "first_name"
-            ,nullable = false)
+    @Column(name = "username"
+            ,nullable = false
+            ,length = 20
+    )
     private String firstName;
 
-    @Column(name = "last_name"
-            ,nullable = false)
+    @Column(name = "description"
+            ,nullable = false
+            ,length = 140
+    )
     private String description;
 
     @Column(name = "email"
