@@ -18,6 +18,30 @@ public class ProjectServices {
         this.projectRepository = projectRepository;
     }
 
+    public List<ProjectTable> getProjectsBySkill(Long skillId){
+        return projectRepository.findBySkillId(skillId);
+    }
+
+    public List<List<String>> getProjectsBySkillList(Long skillId){
+        List<ProjectTable> projects = projectRepository.findBySkillId(skillId);
+        if(projects.isEmpty()){
+            throw new IllegalStateException("There are no projects available for that skill");
+        }
+
+        List<List<String>> projectList = new ArrayList<List<String>>();
+        for(ProjectTable project:projects){
+            List<String> row = new ArrayList<>();
+            row.add(project.getDescription());
+            row.add(String.valueOf(project.getPrice()));
+            row.add(project.getSkill().getName());
+            row.add(project.getStatus().getStatus());
+            row.add("Client " + project.getUser().getFirstName());
+            row.add("Worker " + project.getWorker().getFirstName());
+            projectList.add(row);
+        }
+
+        return projectList;
+    }
 //    public List<ProjectTable> getProjectsBySkill(Long skillId){
 //        return projectRepository.findByskill_ID(skillId);
 //    }
