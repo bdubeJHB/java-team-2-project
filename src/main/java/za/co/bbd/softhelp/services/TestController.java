@@ -14,11 +14,14 @@ import java.util.Optional;
 public class TestController {
     private final ClientServices clientServices;
     private final ProjectServices projectServices;
+    private final SkillServices skillServices;
 
     @Autowired
-    public TestController(ClientServices clientServices, ProjectServices projectServices) {
+    public TestController(ClientServices clientServices, ProjectServices projectServices,
+                          SkillServices skillServices) {
         this.clientServices = clientServices;
         this.projectServices = projectServices;
+        this.skillServices = skillServices;
     }
 
     @GetMapping("/user")
@@ -64,5 +67,10 @@ public class TestController {
     @GetMapping("/projectCancel")
     public String cancelProject(){
         return projectServices.workerCancelProject(2L);
+    }
+
+    @GetMapping("/skills")
+    public List<List<String>> skills(){
+        return skillServices.listOfAllSKillsAndIds();
     }
 }
