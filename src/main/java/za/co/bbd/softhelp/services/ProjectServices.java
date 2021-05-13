@@ -18,28 +18,67 @@ public class ProjectServices {
         this.projectRepository = projectRepository;
     }
 
-//    public List<ProjectTable> getProjectsBySkill(Long skillId){
-//        return projectRepository.findByskill_ID(skillId);
-//    }
+    public List<ProjectTable> getProjectsBySkill(Long skillId){
+        return projectRepository.findBySkillId(skillId);
+    }
 
-//    public List<List<String>> getProjectsBySkillList(Long skillId){
-//        List<ProjectTable> projects = projectRepository.findByskill_ID(skillId);
-//        if(projects.isEmpty()){
-//            throw new IllegalStateException("There are no projects available for that skill");
-//        }
-//
-//        List<List<String>> projectList = new ArrayList<List<String>>();
-//        for(ProjectTable project:projects){
-//            List<String> row = new ArrayList<>();
-//            row.add(project.getDescription());
-//            row.add(String.valueOf(project.getPrice()));
-//            row.add(project.getSkill().getName());
-//            row.add(project.getStatus().getStatus());
-//            row.add("Client " + project.getUser().getFirstName());
-//            row.add("Worker " + project.getWorker().getFirstName());
-//            projectList.add(row);
-//        }
-//
-//        return projectList;
-//    }
+    public List<List<String>> getProjectsBySkillList(Long skillId){
+        List<ProjectTable> projects = projectRepository.findBySkillId(skillId);
+        if(projects.isEmpty()){
+            throw new IllegalStateException("There are no projects available for that skill");
+        }
+
+        List<List<String>> projectList = new ArrayList<List<String>>();
+        for(ProjectTable project:projects){
+            List<String> row = new ArrayList<>();
+            row.add(project.getDescription());
+            row.add(String.valueOf(project.getPrice()));
+            row.add(project.getSkill().getName());
+            row.add(project.getStatus().getStatus());
+            row.add("Client " + project.getUser().getFirstName());
+            row.add("Worker " + project.getWorker().getFirstName());
+            projectList.add(row);
+        }
+
+        return projectList;
+    }
+
+    public List<List<String>> getAllProjectsAsList(){
+        List<ProjectTable> projects = projectRepository.findAll();
+        if(projects.isEmpty()){
+            throw new IllegalStateException("There are no projects available");
+        }
+
+        List<List<String>> projectList = new ArrayList<List<String>>();
+        for(ProjectTable project:projects){
+            List<String> row = new ArrayList<>();
+            row.add(project.getDescription());
+            row.add(String.valueOf(project.getPrice()));
+            row.add(project.getSkill().getName());
+            row.add(project.getStatus().getStatus());
+            row.add("Client " + project.getUser().getFirstName());
+            row.add("Worker " + project.getWorker().getFirstName());
+            projectList.add(row);
+        }
+
+        return projectList;
+    }
+
+    public String deleteProject(Long projectId){
+        Optional<ProjectTable> project = projectRepository.findById(projectId);
+        if(project.isEmpty()){
+            throw new IllegalStateException("Project does not exist");
+        }
+        projectRepository.deleteProject(projectId);
+        return "Project has been removed";
+    }
+
+    public String workerCancelProject(Long projectId){
+        Optional<ProjectTable> project = projectRepository.findById(projectId);
+        if(project.isEmpty()){
+            throw new IllegalStateException("Project does not exist");
+        }
+        projectRepository.changeStatusToAvailable(projectId);
+        return "Project has been canceled";
+    }
 }
