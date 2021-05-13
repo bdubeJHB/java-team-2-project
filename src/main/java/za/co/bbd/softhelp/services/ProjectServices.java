@@ -2,7 +2,10 @@ package za.co.bbd.softhelp.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import za.co.bbd.softhelp.Models.Client;
 import za.co.bbd.softhelp.Models.ProjectTable;
+import za.co.bbd.softhelp.Models.SkillsCategory;
+import za.co.bbd.softhelp.Models.Status;
 import za.co.bbd.softhelp.Repository.ProjectRepository;
 
 import java.util.ArrayList;
@@ -80,5 +83,60 @@ public class ProjectServices {
         }
         projectRepository.changeStatusToAvailable(projectId);
         return "Project has been canceled";
+    }
+
+    public List<ProjectTable> findProjectsByWorkerId(Long workerId){
+        List<ProjectTable> allProjects = projectRepository.findAll();
+        List<ProjectTable> workerProjects = new ArrayList<>();
+
+        for(ProjectTable project: allProjects){
+            try{
+                if(project.getWorker().getUserId() == workerId){
+                    workerProjects.add(project);
+                }
+            }catch (Exception e){
+            }
+        }
+
+        return workerProjects;
+    }
+
+    public List<ProjectTable> findProjectByClientId(Long clientId){
+        List<ProjectTable> allProjects = projectRepository.findAll();
+        List<ProjectTable> clientProjects = new ArrayList<>();
+
+        for(ProjectTable project: allProjects){
+            try{
+                if(project.getUser().getUserId() == clientId){
+                    clientProjects.add(project);
+                }
+            }catch (Exception e){
+            }
+        }
+
+        return clientProjects;
+    }
+
+    public String acceptProjectIfNull(Client worker, Long projectId){
+        ProjectTable project = projectRepository.findById(projectId).get();
+
+        if(project.getWorker() != null){
+            throw new IllegalStateException("Project is taken");
+        }
+        projectRepository.updateProjectStatusInProgress(worker,projectId);
+        return "Project has been Accepted";
+    }
+
+    public String createProject(Client client, int price, String description, SkillsCategory skill, Status status){
+        ProjectTable project = new ProjectTable();
+
+        project.setUser(client);
+        project.setWorker(null);
+        project.setDescription(description);
+        project.setPrice((float) price);
+        project.setSkill(skill);
+        project.setStatus(status);
+        projectRepository.save(project);
+        return "Project Created.";
     }
 }

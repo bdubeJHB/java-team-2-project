@@ -33,4 +33,13 @@ public class StatusService {
         }
         return status.get().getStatusId();
     }
+
+    public Status getStatusObjectById(Long statusId){
+        Optional<Status> status = statusRepository.findById(statusId);
+
+        if(status.isEmpty()){
+            throw new IllegalStateException("Status does not exist");
+        }
+        return status.get();
+    }
 }
