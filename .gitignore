@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+#  Now ignoring the properties file for security and convenience reasons
+src/main/resources/application.properties
+*.properties
