@@ -3,6 +3,8 @@ package za.co.bbd.softhelp.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.co.bbd.softhelp.Models.Client;
+import za.co.bbd.softhelp.Models.SkillsCategory;
+import za.co.bbd.softhelp.Repository.SkillsRepository;
 import za.co.bbd.softhelp.Repository.UserRepository;
 
 import java.util.ArrayList;
@@ -12,10 +14,12 @@ import java.util.Optional;
 @Service
 public class ClientServices {
     final private UserRepository userRepository;
+    final private SkillsRepository skillsRepository;
 
     @Autowired
-    public ClientServices(UserRepository userRepository) {
+    public ClientServices(UserRepository userRepository, SkillsRepository skillsRepository) {
         this.userRepository = userRepository;
+        this.skillsRepository = skillsRepository;
     }
 
     public List<Client> getAllClients(){
@@ -79,6 +83,7 @@ public class ClientServices {
     public Long getClientId(String email){
         List<String> clientInfo = new ArrayList<>();
         Client client = userRepository.findByemail(email).get(0);
+
         return client.getUserId();
     }
 
