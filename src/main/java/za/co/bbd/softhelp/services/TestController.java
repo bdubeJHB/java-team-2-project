@@ -106,4 +106,11 @@ public class TestController {
     public Long getStatusid(){
         return statusService.getStatusId(1L);
     }
+
+    @GetMapping("/setUserSkill")
+    public String setUserSkill(){
+        Client client = clientServices.getClientByEmail("Ethan@bbd").get(0);
+        System.out.println(client);
+        return  skillServices.addSkillToClient(client,1L);
+    }
 }
