@@ -27,10 +27,11 @@ public class EndpointController{
         this.clientService = clientService;
     }
 
-    @GetMapping("/")
-    String loginPage(Model model){
-        return "login";
-    }
+    // Commenting this out so Spring serves the index page automatically from static
+//    @GetMapping("/")
+//    String loginPage(Model model){
+//        return "index.html";
+//    }
 
     /**
      * [Only called internally] Attempt to sign in user.
@@ -41,7 +42,7 @@ public class EndpointController{
      * @return ModelAndView: A new model with the email address as an attribute, and a redirected view
      */
     @PostMapping("/sign-in")
-    ModelAndView checkCredentials(String email, ModelMap model){
+    ModelAndView checkCredentials(@RequestParam(name="email", required=false) String email, ModelMap model){
         try{
             List<Client> user = clientService.getClientByEmail(email);
             model.addAttribute("user", user.get(0));
@@ -78,6 +79,11 @@ public class EndpointController{
         model.addAttribute("user", client);
         model.addAttribute("projects", projects);
         return "home";
+    }
+
+    @GetMapping("/error")
+    String errorPage() {
+        return "error";
     }
 
     /**
