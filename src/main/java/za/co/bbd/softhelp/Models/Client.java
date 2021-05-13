@@ -2,6 +2,7 @@ package za.co.bbd.softhelp.Models;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity()
@@ -116,6 +117,13 @@ public class Client {
 
     public void setProject(List<ProjectTable> project) {
         this.project = project;
+    }
+
+    public void addSkillCategory(SkillsCategory skill){
+        if (skillsCategorys == null) {
+            this.skillsCategorys = new ArrayList<>(0);
+            skillsCategorys.add(skill);
+        }
     }
 
     @Override

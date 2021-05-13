@@ -36,8 +36,8 @@ public class ClientServices {
         return clientList;
     }
 
-    public void addNewUser(Client client){
-        userRepository.save(client);
+    public Client addNewUser(Client client){
+       return userRepository.save(client);
     }
 
     public List<Client> getClientByEmail(String email) throws IllegalStateException{

@@ -72,10 +72,10 @@ public class TestController {
         return projectServices.workerCancelProject(2L);
     }
 
-    @GetMapping("/skills")
-    public List<List<String>> skills(){
-        return skillServices.listOfAllSKillsAndIds();
-    }
+//    @GetMapping("/skills")
+//    public List<List<String>> skills(){
+//        return skillServices.listOfAllSKillsAndIds();
+//    }
 
     @GetMapping("/status")
     public String getStatus(){
