@@ -3,12 +3,8 @@ package za.co.bbd.softhelp.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import za.co.bbd.softhelp.Models.Client;
-import za.co.bbd.softhelp.Models.ProjectTable;
-import za.co.bbd.softhelp.Repository.StatusRepository;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping(value = "testingServices")
@@ -17,6 +13,7 @@ public class TestController {
     private final ProjectServices projectServices;
     private final SkillServices skillServices;
     private final StatusService statusService;
+
 
     @Autowired
     public TestController(ClientServices clientServices, ProjectServices projectServices,
@@ -109,8 +106,8 @@ public class TestController {
 
     @GetMapping("/setUserSkill")
     public String setUserSkill(){
-        Client client = clientServices.getClientByEmail("Ethan@bbd").get(0);
-        System.out.println(client);
+        Client client = clientServices.getClientByEmail("simon@Last").get(0);
+
         return  skillServices.addSkillToClient(client,1L);
     }
 }

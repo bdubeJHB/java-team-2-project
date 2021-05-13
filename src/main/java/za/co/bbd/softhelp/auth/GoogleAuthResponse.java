@@ -1,20 +1,15 @@
 package za.co.bbd.softhelp.auth;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-
 import java.security.Principal;
-import java.util.HashMap;
 
 public class GoogleAuthResponse {
-    private Principal principal;
-    Gson gson = new Gson();
+    private String email;
 
-    public GoogleAuthResponse(Principal principal) {
-        this.principal = principal;
+    public GoogleAuthResponse(Principal p) {
+        setEmail(p);
     }
 
-    public String getEmail() {
+    public void setEmail(Principal principal) {
         String response = principal.toString();
         System.out.println(response);
 
@@ -22,8 +17,12 @@ public class GoogleAuthResponse {
         response = response.substring(emailStartIndex);
 
         int emailEndIndex = response.indexOf("}],");
-        response = response.substring(0,emailEndIndex);
+        response = response.substring(0, emailEndIndex);
 
-        return response;
+        email = response;
+    }
+
+    public String getEmail() {
+        return email;
     }
 }
