@@ -28,9 +28,9 @@ public class SkillsAndStatus {
 //    Client user1 = new Client("Simon","last","simon@Last");
 //    Client user2 = new Client("smith","last","smith@Last");
 
-    Status status1 = new Status("Available");
-    Status status2 = new Status("In progress");
-    Status status3 = new Status("Complete");
+    static Status status1 = new Status("Available");
+    static Status status2 = new Status("In progress");
+    static Status status3 = new Status("Complete");
 
     static SkillsCategory skillsCategory = new SkillsCategory("Java");
     static SkillsCategory skillsCategory1 = new SkillsCategory("JavaScript");
@@ -40,6 +40,10 @@ public class SkillsAndStatus {
 
     public static List<SkillsCategory> getSkillsCategory() {
         return List.of(skillsCategory,skillsCategory1,skillsCategory2,skillsCategory3,skillsCategory4);
+    }
+
+    public static List<Status> getStatuses(){
+        return List.of(status1,status2,status3);
     }
 
     public SkillsAndStatus() {
