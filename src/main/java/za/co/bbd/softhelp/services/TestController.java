@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import za.co.bbd.softhelp.Models.Client;
 import za.co.bbd.softhelp.Models.ProjectTable;
+import za.co.bbd.softhelp.Repository.StatusRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +16,15 @@ public class TestController {
     private final ClientServices clientServices;
     private final ProjectServices projectServices;
     private final SkillServices skillServices;
+    private final StatusService statusService;
 
     @Autowired
     public TestController(ClientServices clientServices, ProjectServices projectServices,
-                          SkillServices skillServices) {
+                          SkillServices skillServices, StatusService statusService) {
         this.clientServices = clientServices;
         this.projectServices = projectServices;
         this.skillServices = skillServices;
+        this.statusService = statusService;
     }
 
     @GetMapping("/user")
@@ -72,5 +75,35 @@ public class TestController {
     @GetMapping("/skills")
     public List<List<String>> skills(){
         return skillServices.listOfAllSKillsAndIds();
+    }
+
+    @GetMapping("/status")
+    public String getStatus(){
+        return statusService.getStatus(1L);
+    }
+
+    @GetMapping("/updateclient")
+    public String updateclient(){
+        return clientServices.updateClientName(1L,"Ethan");
+    }
+
+    @GetMapping("/deleteUser")
+    public void deleteUser(){
+        clientServices.deleteClient(1L);
+    }
+
+    @GetMapping("/updateemail")
+    public String emailchange(){
+        return clientServices.updateClientEmail(1L, "Ethan@bbd");
+    }
+
+    @GetMapping("/updatedes")
+    public String changeDes(){
+        return clientServices.updateClientDescription(1L, "Ethan@bbddsdsdsdsdsdsdsdsdsds");
+    }
+
+    @GetMapping("/statusid")
+    public Long getStatusid(){
+        return statusService.getStatusId(1L);
     }
 }
