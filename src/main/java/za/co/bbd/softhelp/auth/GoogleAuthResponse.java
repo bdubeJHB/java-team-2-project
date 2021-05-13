@@ -11,7 +11,6 @@ public class GoogleAuthResponse {
 
     public void setEmail(Principal principal) {
         String response = principal.toString();
-        System.out.println(response);
 
         int emailStartIndex = response.indexOf("email=") + 6;
         response = response.substring(emailStartIndex);
@@ -23,6 +22,6 @@ public class GoogleAuthResponse {
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 }

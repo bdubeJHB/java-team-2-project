@@ -10,7 +10,7 @@ public class authServerConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .antMatcher("/**").authorizeRequests()
-                .antMatchers("/").permitAll()
+                .antMatchers("/", "/img/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .oauth2Login();

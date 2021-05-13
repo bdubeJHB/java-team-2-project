@@ -69,8 +69,8 @@ public class ProjectServices {
 
     public String deleteProject(Long projectId){
         Optional<ProjectTable> project = projectRepository.findById(projectId);
-        if(project.isEmpty()){
-            throw new IllegalStateException("Project does not exist");
+        if(project.isEmpty() || project.get().getWorker() == null){
+            throw new IllegalStateException("Can not delete Project");
         }
         projectRepository.deleteProject(projectId);
         return "Project has been removed";

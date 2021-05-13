@@ -4,25 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="http://localhost:8080/img/favicon.png"/>
     <title>Document</title>
-
-    <link th:href="@{../css/home.css}" href="../static/css/home.css" rel="stylesheet" />
 </head>
 <body>
-    <section class="cards">
-        <section class="small-card" th:each="project : ${projects}">
-            <a th:href="@{/project/__${project.projectId}__}">
-                <p class="main-text" th:text="${project.description}">Name</p>
-                <p class="sub-text" th:text="${project.skill.name}">Skill</p>
-                <section class="footer">
-                    <p th:text="${project.user.firstName}">Client</p>
-                    <p th:text="${project.price}">Price</p>
-                </section>
-            </a>
-        </section>
-        <section class="small-card">
-            <a href="/all-projects">Load more projects</p>
-        </section>
-    </section>
+   <H6>Welcome....here</H6> 
 </body>
 </html>
