@@ -3,6 +3,8 @@ package za.co.bbd.softhelp.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.co.bbd.softhelp.Models.Client;
+import za.co.bbd.softhelp.Models.SkillsCategory;
+import za.co.bbd.softhelp.Repository.SkillsRepository;
 import za.co.bbd.softhelp.Repository.UserRepository;
 
 import java.util.ArrayList;
@@ -12,10 +14,12 @@ import java.util.Optional;
 @Service
 public class ClientServices {
     final private UserRepository userRepository;
+    final private SkillsRepository skillsRepository;
 
     @Autowired
-    public ClientServices(UserRepository userRepository) {
+    public ClientServices(UserRepository userRepository, SkillsRepository skillsRepository) {
         this.userRepository = userRepository;
+        this.skillsRepository = skillsRepository;
     }
 
     public List<Client> getAllClients(){
@@ -39,7 +43,7 @@ public class ClientServices {
     public List<Client> getClientByEmail(String email) throws IllegalStateException{
         List<Client> client =  userRepository.findByemail(email);
         if(client.isEmpty()){
-            throw new IllegalStateException("Client email: " + email + "does not exist");
+            throw new IllegalStateException("Client email: " + email + " does not exist");
         }
         return client;
     }
@@ -79,15 +83,49 @@ public class ClientServices {
     public Long getClientId(String email){
         List<String> clientInfo = new ArrayList<>();
         Client client = userRepository.findByemail(email).get(0);
+
         return client.getUserId();
     }
 
-//    public void deleteClient(Long id) {
-//        Optional<Client> client = getClientById(id);
-//        if(client.isEmpty()){
-//            throw new IllegalStateException("Client "+id+" does not exist");
-//        }
-//        userRepository.deleteById(id);
-//    }
+    //Only works if the users primary key is not a foreign key
+    public void deleteClient(Long id) {
+        List<Client> client = getClientById(id);
+        if(client.isEmpty()){
+            throw new IllegalStateException("Client "+id+" does not exist");
+        }
+        userRepository.deleteById(id);
+    }
 
+    public String updateClientName(Long id, String name){
+        List<Client> client = getClientById(id);
+        if(client.isEmpty()){
+            throw new IllegalStateException("Client "+id+" does not exist");
+        }
+        userRepository.updateName(id, name);
+        return "Client name changed.";
+    }
+
+    public String updateClientEmail(Long id, String email) {
+        List<Client> isEmail = isEmailRegistered(email);
+        if(!isEmail.isEmpty()){
+            throw new IllegalStateException("Email "+email+" is already registered");
+        }
+        userRepository.updateEmail(id, email);
+        return "Client email updated.";
+    }
+
+    public String updateClientDescription(Long id, String description){
+        List<Client> client = getClientById(id);
+        if(client.isEmpty()){
+            throw new IllegalStateException("Client "+id+" does not exist");
+        }
+        userRepository.updateDescription(id, description);
+        return "Client description updated.";
+    }
+
+    private List<Client> isEmailRegistered(String email) {
+        List<Client> client =  userRepository.findByemail(email);
+
+        return client;
+    }
 }
