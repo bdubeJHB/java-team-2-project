@@ -23,8 +23,7 @@ public class EndpointController{
     ClientServices clientService;
     ProjectServices projectService;
     SkillServices skillService;
-    ProjectRepository projectRepository;
-
+  
     private String userEmail;
 
     @Autowired
@@ -111,5 +110,9 @@ public class EndpointController{
     String allProjectsForUser(@ModelAttribute Client client, Model model){
 //        model.addAttribute("projects", projectService.getProjectsBySkillList(client.getUserId(), -1));
         return "all-projects";
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 }
