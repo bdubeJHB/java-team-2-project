@@ -42,4 +42,13 @@ public class SkillServices {
 
         return "Skill has been added to user.";
     }
+
+    public SkillsCategory getSkillObjectById(Long id){
+        SkillsCategory skill = skillsRepository.findById(id).get();
+
+        if(skill.equals(null)){
+            throw new IllegalStateException("Skill id does not exist");
+        }
+        return skill;
+    }
 }

@@ -3,6 +3,8 @@ package za.co.bbd.softhelp.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import za.co.bbd.softhelp.Models.Client;
+import za.co.bbd.softhelp.Models.ProjectTable;
+
 import java.util.List;
 
 
@@ -44,8 +46,9 @@ public class TestController {
         return clientServices.getClientId("simon@Last");
     }
 
-    @PostMapping("/register")
-    public String registerClient(@RequestBody Client client){
+    @GetMapping("/register")
+    public String registerClient(){
+        Client client = new Client("smith","last","smith@Last");
         return clientServices.addNewClient(client);
     }
 
@@ -106,8 +109,30 @@ public class TestController {
 
     @GetMapping("/setUserSkill")
     public String setUserSkill(){
-        Client client = clientServices.getClientByEmail("simon@Last").get(0);
+        Client client = clientServices.getClientByEmail("smith@Last").get(0);
 
         return  skillServices.addSkillToClient(client,1L);
+    }
+
+    @GetMapping("/workerp")
+    public String getWorkerProjects(){
+        return projectServices.findProjectsByWorkerId(1L).toString();
+    }
+
+    @GetMapping("/clientp")
+    public String clientProjects(){
+        return projectServices.findProjectByClientId(1L).toString();
+    }
+
+    @GetMapping("/acceptp")
+    public String acceptingAOpenProject(){
+        return projectServices.acceptProjectIfNull(clientServices.getClientById(2L).get(0),3L);
+    }
+
+    @GetMapping("/createp")
+    public String createProject(){
+
+        return projectServices.createProject(clientServices.getClientById(2L).get(0),12,"dsds",
+                skillServices.getSkillObjectById(1L),statusService.getStatusObjectById(1L));
     }
 }
