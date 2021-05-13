@@ -1,21 +1,36 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/png" href="http://localhost:8080/img/favicon.png"/>
     <title>New Account</title>
+
+    <link th:href="@{../css/sign-up-style.css}" rel="stylesheet" />
 </head>
 <body>
-    <form action="/home" th:action="@{/home}">
+<section class="card">
+    <form action="/home" th:action="@{/home}" method="POST">
+        <input type="text" placeholder="User Name" name="firstName" />
         <input type="text" placeholder="Email" th:value="${email}" name="email" />
-        <input type="text" placeholder="username" name="firstName" />
-        <input type="text" placeholder="Bio (120 characters)" />
-        <select>
-            <option>Skills list coming soon</option>
-        </select>
+        <textarea rows="4" cols="10" name="description" placeholder="Bio (120 characters max)"></textarea>
+        <section class="skills">
+            <select name="skill_one">
+                <option value="-1" selected disabled>Please select your first skill...</option>
+                <option th:each="skill : ${skills}" th:text="${skill.name}" th:value="${skill.id}"></option>
+            </select>
+            <select name="skill_two">
+                <option value="-1" selected disabled>Please select your second skill...</option>
+                <option th:each="skill : ${skills}" th:text="${skill.name}" th:value="${skill.id}"></option>
+            </select>
+            <select name="skill_three">
+                <option values="-1" selected disabled>Please select your third skill...</option>
+                <option th:each="skill : ${skills}" th:text="${skill.name}" th:value="${skill.id}"></option>
+            </select>
+        </section>
         <input type="submit" value="create acc"/>
     </form>
+</section>
 </body>
 </html>

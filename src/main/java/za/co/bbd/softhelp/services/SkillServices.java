@@ -20,23 +20,24 @@ public class SkillServices {
         this.skillsRepository = skillsRepository;
     }
 
-    public List<List<String>> listOfAllSKillsAndIds(){
-        List<SkillsCategory> skillsCategories = skillsRepository.findAll();
-        List<List<String>> skillList = new ArrayList<List<String>>();
-
-        for(SkillsCategory skill: skillsCategories){
-            List<String> skillAndId = new ArrayList<>();
-            skillAndId.add(String.valueOf(skill.getId()));
-            skillAndId.add(skill.getName());
-            skillList.add(skillAndId);
-        }
-        return skillList;
+    public List<SkillsCategory> listOfAllSKillsAndIds(){
+        return skillsRepository.findAll();
+//        List<List<String>> skillList = new ArrayList<List<String>>();
+//
+//        for(SkillsCategory skill: skillsCategories){
+//            List<String> skillAndId = new ArrayList<>();
+//            skillAndId.add(String.valueOf(skill.getId()));
+//            skillAndId.add(skill.getName());
+//            skillList.add(skillAndId);
+//        }
+//        return skillList;
     }
 
     public String addSkillToClient(Client client, Long skillId){
 
         SkillsCategory skill = SkillsAndStatus.getSkillsCategory().get(skillId.intValue()-1);
         skill.setUser(List.of(client));
+        client.addSkillCategory(skill);
 
         skillsRepository.saveAll(List.of(skill));
 
