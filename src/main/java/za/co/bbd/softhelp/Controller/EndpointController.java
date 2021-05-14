@@ -27,8 +27,6 @@ public class EndpointController{
     ClientServices clientService;
     ProjectServices projectService;
     SkillServices skillService;
-
-    private String userEmail;
     private Client client;
 
     @Autowired
