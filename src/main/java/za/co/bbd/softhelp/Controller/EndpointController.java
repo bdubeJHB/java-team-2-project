@@ -9,6 +9,8 @@ import org.springframework.web.servlet.ModelAndView;
 import za.co.bbd.softhelp.Models.Client;
 import za.co.bbd.softhelp.Models.ProjectTable;
 import za.co.bbd.softhelp.Models.SkillsCategory;
+import za.co.bbd.softhelp.Models.Status;
+import za.co.bbd.softhelp.Repository.ProjectRepository;
 import za.co.bbd.softhelp.auth.GoogleAuthResponse;
 import za.co.bbd.softhelp.services.ClientServices;
 import za.co.bbd.softhelp.services.ProjectServices;
@@ -121,6 +123,15 @@ public class EndpointController{
         return new ModelAndView("redirect:/home", model);
     }
 
+    @PostMapping("/create-project")
+    ModelAndView createProject(String description, Long required_skill, int price, ModelMap model){
+        List<SkillsCategory> skills = skillService.listOfAllSKillsAndIds();
+
+        projectService.createProject(this.client, price, description, skills.get(required_skill.intValue() - 1));
+
+        return new ModelAndView("redirect:/my-projects", model);
+    }
+
     @GetMapping("/all-projects")
     String allProjectsForUser(Model model){
         List<ProjectTable> projects = new ArrayList<>();
@@ -133,5 +144,16 @@ public class EndpointController{
 
         model.addAttribute("projects", projects);
         return "all-projects";
+    }
+
+    @GetMapping("/my-projects")
+    String myProjects(Model model){
+        List<ProjectTable> assigned = projectService.findProjectsByWorkerId(client.getUserId());
+        List<ProjectTable> posted = projectService.findProjectByClientId(client.getUserId());
+
+        model.addAttribute("assigned", assigned);
+        model.addAttribute("posted", posted);
+        model.addAttribute("skills", skillService.listOfAllSKillsAndIds());
+        return "my-projects";
     }
 }
