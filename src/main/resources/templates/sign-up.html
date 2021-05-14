@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SH | New Account</title>
+    <title>SoftHelp | New Account</title>
 
     <link href="../static/css/sign-up-style.css" th:href="@{../css/sign-up-style.css}" rel="stylesheet" />
     <link rel="shortcut icon" type="image/png" href="http://localhost:8080/img/favicon.png" />
@@ -17,7 +17,7 @@
                 <tbody>
                     <tr>
                         <td rowspan="3" class="logo">
-                        <img src="http://localhost:8080/img/logo.png" class="softhelp" />
+                        <img th:src="${profilePicLink}" class="softhelp" />
                         </td>
                     </tr>
                     <tr>
