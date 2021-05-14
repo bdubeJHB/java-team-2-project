@@ -97,4 +97,6 @@
 
 .softhelp {
     width:45%;
+    border: 1px solid #222240;
+    border-radius: 5px 25px 10px 2px;
 }

@@ -12,7 +12,7 @@
 <body>
     <section class="user-card" th:object="${client}">
         <section class="top">
-            <image src="http://localhost:8080/img/logo.png" class="softhelp"></image>
+            <image th:src="${profilePicLink}" class="softhelp"></image>
             <section>
                 <h2 th:text="${client.firstName}">username</h2>
                 <h4 th:text="${client.email}">email</h4>

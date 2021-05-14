@@ -28,6 +28,7 @@ public class EndpointController{
     ProjectServices projectService;
     SkillServices skillService;
     private Client client;
+    private String profilePicLink;
 
     @Autowired
     EndpointController(ClientServices clientService, ProjectServices projectService, SkillServices skillService){
@@ -48,6 +49,7 @@ public class EndpointController{
     public String checkCredentials(Principal principal, Model model){
         GoogleAuthResponse googleAuthResponse = new GoogleAuthResponse(principal);
         String email = googleAuthResponse.getEmail();
+        this.profilePicLink = googleAuthResponse.getProfilePicLink();
 
         try{
             List<Client> user = clientService.getClientByEmail(email);
@@ -60,6 +62,7 @@ public class EndpointController{
 
     @GetMapping("/sign-up")
     String createUser(String email, Model model){
+        model.addAttribute("profilePicLink", profilePicLink);
         model.addAttribute("email", email);
         model.addAttribute("skills", skillService.listOfAllSKillsAndIds());
         return "sign-up";
@@ -77,6 +80,7 @@ public class EndpointController{
                 skillService.addSkillToClient(client, (long) Integer.parseInt(skill_id));
             }
         }
+        model.addAttribute("profilePicLink", profilePicLink);  //Not needed but image loads incorrectly when excluded
 
         return homePage(client, model);
     }
