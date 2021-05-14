@@ -27,19 +27,12 @@ public class EndpointController{
     ProjectServices projectService;
     SkillServices skillService;
 
-    private String userEmail;
-
     @Autowired
     EndpointController(ClientServices clientService, ProjectServices projectService, SkillServices skillService){
         this.projectService = projectService;
         this.clientService = clientService;
         this.skillService = skillService;
     }
-
-//    @GetMapping("/")
-//    String loginPage(Model model){
-//        return "login";
-//    }
 
     /**
      * [Only called internally] Attempt to sign in user.
