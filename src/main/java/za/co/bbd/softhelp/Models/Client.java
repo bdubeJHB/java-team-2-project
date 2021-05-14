@@ -61,6 +61,9 @@ public class Client {
         this.firstName = firstName;
         this.description = lastName;
         this.email = email;
+        this.skillsCategorys = new ArrayList<>(0);
+        this.projectTables = new ArrayList<>(0);
+        this.project = new ArrayList<>(0);
     }
 
     public Long getUserId() {
@@ -122,8 +125,8 @@ public class Client {
     public void addSkillCategory(SkillsCategory skill){
         if (skillsCategorys == null) {
             this.skillsCategorys = new ArrayList<>(0);
-            skillsCategorys.add(skill);
         }
+        skillsCategorys.add(skill);
     }
 
     @Override

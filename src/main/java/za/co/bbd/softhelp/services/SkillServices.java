@@ -22,15 +22,6 @@ public class SkillServices {
 
     public List<SkillsCategory> listOfAllSKillsAndIds(){
         return skillsRepository.findAll();
-//        List<List<String>> skillList = new ArrayList<List<String>>();
-//
-//        for(SkillsCategory skill: skillsCategories){
-//            List<String> skillAndId = new ArrayList<>();
-//            skillAndId.add(String.valueOf(skill.getId()));
-//            skillAndId.add(skill.getName());
-//            skillList.add(skillAndId);
-//        }
-//        return skillList;
     }
 
     public String addSkillToClient(Client client, Long skillId){

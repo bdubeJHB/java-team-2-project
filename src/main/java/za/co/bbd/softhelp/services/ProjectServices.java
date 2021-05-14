@@ -11,6 +11,7 @@ import za.co.bbd.softhelp.Repository.ProjectRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProjectServices {
@@ -22,7 +23,12 @@ public class ProjectServices {
     }
 
     public List<ProjectTable> getProjectsBySkill(Long skillId){
-        return projectRepository.findBySkillId(skillId);
+        List<ProjectTable> projectsUnfiltered = projectRepository.findBySkillId(skillId);
+
+        projectsUnfiltered = projectsUnfiltered.stream()
+                .filter(s-> s.getWorker() == null)
+                .collect(Collectors.toList());;
+        return projectsUnfiltered;
     }
 
     public List<List<String>> getProjectsBySkillList(Long skillId){
@@ -115,6 +121,10 @@ public class ProjectServices {
         }
 
         return clientProjects;
+    }
+
+    public ProjectTable getProjectByID(Long ID){
+        return projectRepository.findById(ID).get();
     }
 
     public String acceptProjectIfNull(Client worker, Long projectId){

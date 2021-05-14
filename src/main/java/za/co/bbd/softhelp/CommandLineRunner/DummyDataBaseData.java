@@ -52,7 +52,6 @@ public class DummyDataBaseData {
                     "megan.tucker@gmail.com"
             );
 
-
             SkillsAndStatus.getSkillsCategory().get(0).setUser(List.of(user,user3));
             SkillsAndStatus.getSkillsCategory().get(1).setUser(List.of(user1,user2));
             SkillsAndStatus.getSkillsCategory().get(2).setUser(List.of(user2,user1));
@@ -61,14 +60,56 @@ public class DummyDataBaseData {
             ProjectTable projectTable = new ProjectTable("website", 123.0F);
             projectTable.setUser(user);
             projectTable.setStatus(SkillsAndStatus.getStatuses().get(0));
-            projectTable.setSkill(SkillsAndStatus.getSkillsCategory().get(1));
+            projectTable.setSkill(SkillsAndStatus.getSkillsCategory().get(3));
             projectTable.setWorker(null);
 
             ProjectTable projectTable2 = new ProjectTable("mobile app", 133.0F);
             projectTable2.setUser(user1);
             projectTable2.setStatus(SkillsAndStatus.getStatuses().get(0));
-            projectTable2.setSkill(SkillsAndStatus.getSkillsCategory().get(2));
+            projectTable2.setSkill(SkillsAndStatus.getSkillsCategory().get(3));
             projectTable2.setWorker(null);
+
+            ProjectTable projectTable3 = new ProjectTable("3 month internship", 7000.0F);
+            projectTable3.setUser(user2);
+            projectTable3.setStatus(SkillsAndStatus.getStatuses().get(0));
+            projectTable3.setSkill(SkillsAndStatus.getSkillsCategory().get(3));
+            projectTable3.setWorker(null);
+
+            ProjectTable projectTable4 = new ProjectTable("uber for submarines", 133.0F);
+            projectTable4.setUser(user3);
+            projectTable4.setStatus(SkillsAndStatus.getStatuses().get(0));
+            projectTable4.setSkill(SkillsAndStatus.getSkillsCategory().get(3));
+            projectTable4.setWorker(null);
+
+            ProjectTable projectTable5 = new ProjectTable("weather app", 62.0F);
+            projectTable4.setUser(user2);
+            projectTable4.setStatus(SkillsAndStatus.getStatuses().get(0));
+            projectTable4.setSkill(SkillsAndStatus.getSkillsCategory().get(3));
+            projectTable4.setWorker(null);
+
+            ProjectTable projectTable6 = new ProjectTable("AI", 342.0F);
+            projectTable4.setUser(user1);
+            projectTable4.setStatus(SkillsAndStatus.getStatuses().get(0));
+            projectTable4.setSkill(SkillsAndStatus.getSkillsCategory().get(3));
+            projectTable4.setWorker(null);
+
+            ProjectTable projectTable7 = new ProjectTable("mouse driver", 42.0F);
+            projectTable4.setUser(user3);
+            projectTable4.setStatus(SkillsAndStatus.getStatuses().get(0));
+            projectTable4.setSkill(SkillsAndStatus.getSkillsCategory().get(3));
+            projectTable4.setWorker(null);
+
+            ProjectTable projectTable8 = new ProjectTable("video game", 112.0F);
+            projectTable4.setUser(user3);
+            projectTable4.setStatus(SkillsAndStatus.getStatuses().get(0));
+            projectTable4.setSkill(SkillsAndStatus.getSkillsCategory().get(3));
+            projectTable4.setWorker(null);
+
+            ProjectTable projectTable9 = new ProjectTable("BOLT for submarines", 3.0F);
+            projectTable4.setUser(user3);
+            projectTable4.setStatus(SkillsAndStatus.getStatuses().get(0));
+            projectTable4.setSkill(SkillsAndStatus.getSkillsCategory().get(3));
+            projectTable4.setWorker(null);
 
             userRepository.saveAll(List.of(user,user1,user2,user3));
             skillsRepository.saveAll(List.of(
@@ -78,7 +119,7 @@ public class DummyDataBaseData {
                     SkillsAndStatus.getSkillsCategory().get(3)
             ));
             statusRepository.saveAll(List.of(SkillsAndStatus.getStatuses().get(0)));
-            projectRepository.saveAll(List.of(projectTable,projectTable2));
+            projectRepository.saveAll(List.of(projectTable,projectTable2, projectTable3, projectTable4));
 
         };
 

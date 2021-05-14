@@ -28,6 +28,7 @@ public class EndpointController{
     SkillServices skillService;
 
     private String userEmail;
+    private Client client;
 
     @Autowired
     EndpointController(ClientServices clientService, ProjectServices projectService, SkillServices skillService){
@@ -36,32 +37,26 @@ public class EndpointController{
         this.skillService = skillService;
     }
 
-//    @GetMapping("/")
-//    String loginPage(Model model){
-//        return "login";
-//    }
-
     /**
-     * [Only called internally] Attempt to sign in user.
+     * Attempt to sign in user.
      * If the given email exists in DB, redirect the user to the home page.
      * Otherwise, redirect the user to the sign up page.
-//     * @param email: The email address of the user attempting to log in             // COMMENT ME OUT ONCE OAUTH EMAIL WORKS
+     * @param principal: benedict will explain...
      * @param model: The model map to be used for redirecting
      * @return ModelAndView: A new model with the email address as an attribute, and a redirected view
      */
     @GetMapping("/sign-in")
-    public ModelAndView checkCredentials(Principal principal, ModelMap model){
+    public String checkCredentials(Principal principal, Model model){
         GoogleAuthResponse googleAuthResponse = new GoogleAuthResponse(principal);
         String email = googleAuthResponse.getEmail();
 
         try{
             List<Client> user = clientService.getClientByEmail(email);
-            model.addAttribute("user", user.get(0));
-            return new ModelAndView("redirect:/home", model);
+            client = user.get(0);
+            return homePage(client, model);
         }catch(IllegalStateException ignored){}
 
-        model.addAttribute("email", email);
-        return new ModelAndView("redirect:/sign-up", model);
+        return createUser(email, model);
     }
 
     @GetMapping("/sign-up")
@@ -74,6 +69,7 @@ public class EndpointController{
     @PostMapping("/home")
     String addNewUser(@ModelAttribute Client client, String skill_one, String skill_two, String skill_three, Model model){
         client = clientService.addNewUser(client);
+        this.client = client;
 
         String[] skill_ids = {skill_one, skill_two, skill_three};
 
@@ -89,6 +85,7 @@ public class EndpointController{
     @GetMapping("/home")
     String homePage(@ModelAttribute Client client, Model model){
         List<ProjectTable> projects = new ArrayList<>(0);
+        client = clientService.getClientById(this.client.getUserId()).get(0);
 
         for (SkillsCategory skill : client.getSkillsCategorys())
         {
@@ -96,22 +93,44 @@ public class EndpointController{
             projects.addAll(projectsForSkill);
         }
 
+        // making sure we have 5 projects max shown
         Collections.shuffle(projects);
-        model.addAttribute("projects", projects); // request a list of projects for the user ID
+        projects = projects.size() > 5 ? projects.subList(0, 5) : projects;
+
+        model.addAttribute("client", client);
+        model.addAttribute("projects", projects);
         model.addAttribute("user", client);
         return "home";
     }
 
     @GetMapping("/project/{id}")
-    String projectPage(@RequestParam Long id, Model model){
-//        model.addAttribute("project", projectService.getProjectByID(id));
+    String projectPage(@PathVariable(value = "id") Long id, Model model){
+        ProjectTable project = projectService.getProjectByID(id);
 
+        model.addAttribute("project", project);
+        model.addAttribute("id", id);
         return "project";
     }
 
+    @GetMapping("/accept/{id}")
+    ModelAndView acceptProject(@PathVariable(value = "id") Long id, ModelMap model){
+        this.client = clientService.getClientById(this.client.getUserId()).get(0);
+        projectService.acceptProjectIfNull(this.client, id);
+
+        return new ModelAndView("redirect:/home", model);
+    }
+
     @PutMapping("/all-projects")
-    String allProjectsForUser(@ModelAttribute Client client, Model model){
-//        model.addAttribute("projects", projectService.getProjectsBySkillList(client.getUserId(), -1));
+    String allProjectsForUser(Model model){
+        List<ProjectTable> projects = new ArrayList<>();
+
+        for (SkillsCategory skill : client.getSkillsCategorys())
+        {
+            List<ProjectTable> projectsForSkill = projectService.getProjectsBySkill(skill.getId());
+            projects.addAll(projectsForSkill);
+        }
+
+        model.addAttribute("projects", projects);
         return "all-projects";
     }
 }

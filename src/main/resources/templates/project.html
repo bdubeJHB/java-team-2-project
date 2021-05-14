@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SH | Project Page</title>
+
+    <link th:href="@{../css/project.css}" href="../static/css/project.css" rel="stylesheet" />
+    <link rel="shortcut icon" type="image/png" href="http://localhost:8080/img/favicon.png" />
+</head>
+<body>
+    <section class="project-card" th:object="${project}">
+        <section class="top">
+            <section>
+                <h2 th:text="${project.description}">project name</h2>
+                <h4 th:text="${project.user.firstName}">client email</h4>
+            </section>
+            <section th:text="${project.skill.name}">skill required</section>
+        </section>
+        <section class="bottom">
+            <a th:href="@{/accept/__${id}__}"><section class=button>accept</section></a>
+            <a th:href="@{/home}"><section class=button>go home</section></a>
+        </section>
+    </section>
+</body>
+</html>
