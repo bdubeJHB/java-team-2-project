@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SH - My Projects</title>
+
+    <link th:href="@{../css/my-projects-style.css}" href="../static/css/my-projects-style.css" rel="stylesheet" />
+    <link rel="shortcut icon" type="image/png" href="http://localhost:8080/img/favicon.png" />
+</head>
+<body>
+    <section class="cards">
+        <p>projects assigned to me</p>
+        <section class="assignments">
+            <section class="small-card" th:each="project : ${assigned}">
+                <a th:href="@{/project/__${project.projectId}__}">
+                    <p class="main-text" th:text="${project.description}">Name</p>
+                    <p class="sub-text" th:text="${project.skill.name}">Skill</p>
+                    <section class="footer">
+                        <p th:text="${project.user.firstName}">Client</p>
+                        <p th:text="${project.price}">Price</p>
+                    </section>
+                </a>
+            </section>
+            <section class="small-card">
+                <p>End of list..</p>
+            </section>
+        </section>
+        <p>projects posted by me</p>
+        <section class="posted">
+            <section class="small-card" th:each="posted : ${posted}">
+                <a th:href="@{/project/__${posted.projectId}__}">
+                    <p class="main-text" th:text="${posted.description}">Name</p>
+                    <p class="sub-text" th:text="${posted.skill.name}">Skill</p>
+                    <section class="footer">
+                        <p th:text="${posted.user.firstName}">Client</p>
+                        <p th:text="${posted.price}">Price</p>
+                    </section>
+                </a>
+            </section>
+            <section class="small-card">
+                <p>End of list..</p>
+            </section>
+        </section>
+    </section>
+    <form method="POST" action="/create-project">
+        <input type="text" name="description" placeholder="Name your project" maxlength="20" required/>
+        <select name="required-skill" required>
+            <option value="-1" selected disabled>Please select the required-skill...</option>
+            <option th:each="skill : ${skills}" th:text="${skill.name}" th:value="${skill.id}"></option>
+        </select>
+        <input type="number" name="price" placeholder="Name your price :)" required/>
+        <input type="submit" value="Post project" />
+        <a href="/home" >back to home page</a>
+    </form>
+</body>
+</html>

@@ -97,7 +97,7 @@ public class ProjectServices {
 
         for(ProjectTable project: allProjects){
             try{
-                if(project.getWorker().getUserId() == workerId){
+                if(project.getWorker().getUserId().equals(workerId)){
                     workerProjects.add(project);
                 }
             }catch (Exception e){
@@ -113,7 +113,7 @@ public class ProjectServices {
 
         for(ProjectTable project: allProjects){
             try{
-                if(project.getUser().getUserId() == clientId){
+                if(project.getUser().getUserId().equals(clientId)){
                     clientProjects.add(project);
                 }
             }catch (Exception e){
