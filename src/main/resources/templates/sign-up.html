@@ -5,16 +5,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Account</title>
+    <title>SH | New Account</title>
 
-    <link th:href="@{../css/sign-up-style.css}" rel="stylesheet" />
+    <link href="../static/css/sign-up-style.css" th:href="@{../css/sign-up-style.css}" rel="stylesheet" />
+    <link rel="shortcut icon" type="image/png" href="http://localhost:8080/img/favicon.png" />
 </head>
 <body>
+
+    <div class="container">
+            <table class="home">
+                <tbody>
+                    <tr>
+                        <td rowspan="3" class="logo">
+                        <img src="http://localhost:8080/img/logo.png" class="softhelp" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col">
+                                <p>Create a new account</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
 <section class="card">
     <form action="/home" th:action="@{/home}" method="POST">
-        <input type="text" placeholder="User Name" name="firstName" />
-        <input type="text" placeholder="Email" th:value="${email}" name="email" />
-        <textarea rows="4" cols="10" name="description" placeholder="Bio (120 characters max)"></textarea>
+        <input type="text" maxlength="20" placeholder="User Name" name="firstName" />
+        <input type="email" placeholder="Email" th:value="${email}" name="email" />
+        <textarea rows="4" cols="10" maxlength="120" name="description" placeholder="Bio (120 characters max)"></textarea>
         <section class="skills">
             <select name="skill_one">
                 <option value="-1" selected disabled>Please select your first skill...</option>
@@ -29,7 +48,7 @@
                 <option th:each="skill : ${skills}" th:text="${skill.name}" th:value="${skill.id}"></option>
             </select>
         </section>
-        <input type="submit" value="create acc"/>
+        <input type="submit" value="create account" class="button"/>
     </form>
 </section>
 </body>
