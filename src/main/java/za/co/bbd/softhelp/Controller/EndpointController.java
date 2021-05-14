@@ -9,7 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 import za.co.bbd.softhelp.Models.Client;
 import za.co.bbd.softhelp.Models.ProjectTable;
 import za.co.bbd.softhelp.Models.SkillsCategory;
-import za.co.bbd.softhelp.Repository.ProjectRepository;
 import za.co.bbd.softhelp.auth.GoogleAuthResponse;
 import za.co.bbd.softhelp.services.ClientServices;
 import za.co.bbd.softhelp.services.ProjectServices;
@@ -26,8 +25,6 @@ public class EndpointController{
     ClientServices clientService;
     ProjectServices projectService;
     SkillServices skillService;
-
-    private String userEmail;
     private Client client;
 
     @Autowired
