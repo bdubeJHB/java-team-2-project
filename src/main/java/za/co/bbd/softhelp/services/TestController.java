@@ -129,10 +129,10 @@ public class TestController {
         return projectServices.acceptProjectIfNull(clientServices.getClientById(2L).get(0),3L);
     }
 
-    @GetMapping("/createp")
-    public String createProject(){
-
-        return projectServices.createProject(clientServices.getClientById(2L).get(0),12,"dsds",
-                skillServices.getSkillObjectById(1L),statusService.getStatusObjectById(1L));
-    }
+//    @GetMapping("/createp")
+//    public String createProject(){
+//
+//        return projectServices.createProject(clientServices.getClientById(2L).get(0),12,"dsds",
+//                skillServices.getSkillObjectById(1L),statusService.getStatusObjectById(1L));
+//    }
 }

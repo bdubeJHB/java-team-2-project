@@ -2,11 +2,13 @@ package za.co.bbd.softhelp.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import za.co.bbd.softhelp.CommandLineRunner.SkillsAndStatus;
 import za.co.bbd.softhelp.Models.Client;
 import za.co.bbd.softhelp.Models.ProjectTable;
 import za.co.bbd.softhelp.Models.SkillsCategory;
 import za.co.bbd.softhelp.Models.Status;
 import za.co.bbd.softhelp.Repository.ProjectRepository;
+import za.co.bbd.softhelp.Repository.StatusRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +18,12 @@ import java.util.stream.Collectors;
 @Service
 public class ProjectServices {
     final private ProjectRepository projectRepository;
+    final private StatusRepository statusRepository;
 
     @Autowired
-    public ProjectServices(ProjectRepository projectRepository) {
+    public ProjectServices(ProjectRepository projectRepository,StatusRepository statusRepository) {
         this.projectRepository = projectRepository;
+        this.statusRepository = statusRepository;
     }
 
     public List<ProjectTable> getProjectsBySkill(Long skillId){
@@ -137,7 +141,7 @@ public class ProjectServices {
         return "Project has been Accepted";
     }
 
-    public String createProject(Client client, int price, String description, SkillsCategory skill, Status status){
+    public String createProject(Client client, int price, String description, SkillsCategory skill){
         ProjectTable project = new ProjectTable();
 
         project.setUser(client);
@@ -145,7 +149,8 @@ public class ProjectServices {
         project.setDescription(description);
         project.setPrice((float) price);
         project.setSkill(skill);
-        project.setStatus(status);
+        project.setStatus(SkillsAndStatus.getStatuses().get(0));
+        statusRepository.save(SkillsAndStatus.getStatuses().get(0));
         projectRepository.save(project);
         return "Project Created.";
     }

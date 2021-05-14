@@ -44,9 +44,9 @@
             </section>
         </section>
     </section>
-    <form method="POST" action="/create-project">
+    <form method="POST" action="/create-project" th:action="@{/create-project}">
         <input type="text" name="description" placeholder="Name your project" maxlength="20" required/>
-        <select name="required-skill" required>
+        <select name="required_skill" required>
             <option value="-1" selected disabled>Please select the required-skill...</option>
             <option th:each="skill : ${skills}" th:text="${skill.name}" th:value="${skill.id}"></option>
         </select>

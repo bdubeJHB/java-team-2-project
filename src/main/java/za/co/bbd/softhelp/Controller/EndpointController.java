@@ -125,7 +125,9 @@ public class EndpointController{
 
     @PostMapping("/create-project")
     ModelAndView createProject(String description, Long required_skill, int price, ModelMap model){
-        projectService.createProject(this.client, price, description, skillService.getSkillObjectById(required_skill), new Status());
+        List<SkillsCategory> skills = skillService.listOfAllSKillsAndIds();
+
+        projectService.createProject(this.client, price, description, skills.get(required_skill.intValue() - 1));
 
         return new ModelAndView("redirect:/my-projects", model);
     }

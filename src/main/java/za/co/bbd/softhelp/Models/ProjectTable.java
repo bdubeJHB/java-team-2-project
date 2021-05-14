@@ -11,10 +11,12 @@ public class ProjectTable {
             name ="project_sequence",
             sequenceName = "project_sequence",
             allocationSize =1
+
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
             generator = "project_sequence"
+
     )
 
     private long projectId;
