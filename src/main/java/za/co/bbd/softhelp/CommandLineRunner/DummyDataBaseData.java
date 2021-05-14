@@ -82,44 +82,47 @@ public class DummyDataBaseData {
             projectTable4.setWorker(null);
 
             ProjectTable projectTable5 = new ProjectTable("weather app", 62.0F);
-            projectTable4.setUser(user2);
-            projectTable4.setStatus(SkillsAndStatus.getStatuses().get(0));
-            projectTable4.setSkill(SkillsAndStatus.getSkillsCategory().get(3));
-            projectTable4.setWorker(null);
+            projectTable5.setUser(user2);
+            projectTable5.setStatus(SkillsAndStatus.getStatuses().get(0));
+            projectTable5.setSkill(SkillsAndStatus.getSkillsCategory().get(3));
+            projectTable5.setWorker(null);
 
             ProjectTable projectTable6 = new ProjectTable("AI", 342.0F);
-            projectTable4.setUser(user1);
-            projectTable4.setStatus(SkillsAndStatus.getStatuses().get(0));
-            projectTable4.setSkill(SkillsAndStatus.getSkillsCategory().get(3));
-            projectTable4.setWorker(null);
+            projectTable6.setUser(user1);
+            projectTable6.setStatus(SkillsAndStatus.getStatuses().get(0));
+            projectTable6.setSkill(SkillsAndStatus.getSkillsCategory().get(3));
+            projectTable6.setWorker(null);
 
             ProjectTable projectTable7 = new ProjectTable("mouse driver", 42.0F);
-            projectTable4.setUser(user3);
-            projectTable4.setStatus(SkillsAndStatus.getStatuses().get(0));
-            projectTable4.setSkill(SkillsAndStatus.getSkillsCategory().get(3));
-            projectTable4.setWorker(null);
+            projectTable7.setUser(user3);
+            projectTable7.setStatus(SkillsAndStatus.getStatuses().get(0));
+            projectTable7.setSkill(SkillsAndStatus.getSkillsCategory().get(3));
+            projectTable7.setWorker(null);
 
             ProjectTable projectTable8 = new ProjectTable("video game", 112.0F);
-            projectTable4.setUser(user3);
-            projectTable4.setStatus(SkillsAndStatus.getStatuses().get(0));
-            projectTable4.setSkill(SkillsAndStatus.getSkillsCategory().get(3));
-            projectTable4.setWorker(null);
+            projectTable8.setUser(user3);
+            projectTable8.setStatus(SkillsAndStatus.getStatuses().get(0));
+            projectTable8.setSkill(SkillsAndStatus.getSkillsCategory().get(3));
+            projectTable8.setWorker(null);
 
             ProjectTable projectTable9 = new ProjectTable("BOLT for submarines", 3.0F);
-            projectTable4.setUser(user3);
-            projectTable4.setStatus(SkillsAndStatus.getStatuses().get(0));
-            projectTable4.setSkill(SkillsAndStatus.getSkillsCategory().get(3));
-            projectTable4.setWorker(null);
+            projectTable9.setUser(user3);
+            projectTable9.setStatus(SkillsAndStatus.getStatuses().get(0));
+            projectTable9.setSkill(SkillsAndStatus.getSkillsCategory().get(3));
+            projectTable9.setWorker(null);
 
             userRepository.saveAll(List.of(user,user1,user2,user3));
             skillsRepository.saveAll(List.of(
                     SkillsAndStatus.getSkillsCategory().get(0),
                     SkillsAndStatus.getSkillsCategory().get(1),
                     SkillsAndStatus.getSkillsCategory().get(2),
-                    SkillsAndStatus.getSkillsCategory().get(3)
+                    SkillsAndStatus.getSkillsCategory().get(3),
+                    SkillsAndStatus.getSkillsCategory().get(4)
             ));
             statusRepository.saveAll(List.of(SkillsAndStatus.getStatuses().get(0)));
-            projectRepository.saveAll(List.of(projectTable,projectTable2, projectTable3, projectTable4));
+            projectRepository.saveAll(List.of(projectTable,projectTable2, projectTable3,
+                    projectTable4, projectTable5, projectTable6,
+                    projectTable7, projectTable8, projectTable9));
 
         };
 

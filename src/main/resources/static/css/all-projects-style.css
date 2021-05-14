@@ -10,7 +10,7 @@
 .cards {
     display: grid;
     grid-gap: 10px;
-    grid-template-columns: repeat(10, auto);
+    grid-template-columns: repeat(5, auto);
 }
 
 .small-card {
@@ -20,7 +20,7 @@
 
     padding: 2%;
     max-width: 10vw;
-    min-width: 250px;
+    min-width: 300px;
     min-height: 15vh;
 
     border-style: solid;

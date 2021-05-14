@@ -120,7 +120,7 @@ public class EndpointController{
         return new ModelAndView("redirect:/home", model);
     }
 
-    @PutMapping("/all-projects")
+    @GetMapping("/all-projects")
     String allProjectsForUser(Model model){
         List<ProjectTable> projects = new ArrayList<>();
 
